@@ -57,3 +57,10 @@ The offlineToggle can also be set to true or false by pressing O (oh) on the key
 Now, all existing animations can be triggered in Unity by starting the play mode and by triggering animations in the Animator column.
 
 Additional faces could be added. Useful tutorials for starting with Unity can be found on YouTube and on the Unity homepage.
+
+## LipSync
+All SALSA LipSync settings can be changed in the Game Object (Face > Mouth2.0) components.
+### Audio Input
+The audio file can be changed in the Audio Source component. Go to SALSA > Settings > Dynamics and change Min/Max in the "Linear Scaled Cutoff" until you get a satisfying result.
+### Microphone Input
+To controll the Mouth with your voice, connect SALSA to your microphone. To do so, activate the "Salsa Mic Pointer Sync (Script)" and "SalsaMicInput" component. In the "SalsaMicInput" make sure to check "Override Rate" and "Link with SALSA", this will override some Settings in the "SALSA" component (i.e activate "Using Microphone"). 
