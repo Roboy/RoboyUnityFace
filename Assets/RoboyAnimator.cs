@@ -15,7 +15,7 @@ public class RoboyAnimator : MonoBehaviour
     public GameObject leftEye;
     public GameObject rightEye;
     Animator anim;
-    public bool offlineToggle = true;
+    public bool offlineToggle = false;
     bool pirate = false;
     bool cryingRoboy = false;
     bool specs = false;
