@@ -1,6 +1,9 @@
 ﻿using CrazyMinnow.SALSA;
 using UnityEngine;
 
+/// <summary>
+/// This class publish blendshape values computed by SALSA to ROS. 
+/// </summary>
 
 public class SalsaVisemeTriggerEventSubscriber : MonoBehaviour
 {
@@ -25,7 +28,7 @@ public class SalsaVisemeTriggerEventSubscriber : MonoBehaviour
 	{
 		if (e.salsaInstance == salsaInstance)
 		{
-			// here should e.visemeTrigger  & salsaInstance.CachedAnalysisValue be published to ROS
+			// TODO here should e.visemeTrigger  & salsaInstance.CachedAnalysisValue be published to ROS
 		
 
 			Debug.Log("Viseme (Index) triggered: " + e.visemeTrigger);
