@@ -351,6 +351,7 @@ namespace CrazyMinnow.SALSA
 
 			audioSrc.clip = Microphone.Start(mic, true, loopLength, sampleRate);
 
+
 			// Let the Microphone start filling the buffer prior to activating the AudioSource.
 			while ( !( Microphone.GetPosition(mic) > 0 ) )
 			{
