@@ -1,6 +1,7 @@
 ﻿using CrazyMinnow.SALSA;
 using UnityEngine;
 
+
 public class SalsaVisemeTriggerEventSubscriber : MonoBehaviour
 {
 	
@@ -12,12 +13,12 @@ public class SalsaVisemeTriggerEventSubscriber : MonoBehaviour
 
     private void OnEnable()
 	{
-		
+		Salsa.VisemeTriggered += SalsaOnVisemeTriggered;
 	}
 
 	private void OnDisable()
 	{
-		
+		Salsa.VisemeTriggered -= SalsaOnVisemeTriggered;
 	}
 
 	private void SalsaOnVisemeTriggered(object sender, Salsa.SalsaNotificationArgs e)
@@ -25,7 +26,7 @@ public class SalsaVisemeTriggerEventSubscriber : MonoBehaviour
 		if (e.salsaInstance == salsaInstance)
 		{
 			// here should e.visemeTrigger  & salsaInstance.CachedAnalysisValue be published to ROS
-
+		
 
 			Debug.Log("Viseme (Index) triggered: " + e.visemeTrigger);
             Debug.Log("Cached analysis value: " + salsaInstance.CachedAnalysisValue);
