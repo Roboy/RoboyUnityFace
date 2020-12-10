@@ -1,4 +1,5 @@
 ﻿using CrazyMinnow.SALSA;
+using RosSharp.RosBridgeClient;
 using UnityEngine;
 
 /// <summary>
@@ -10,10 +11,13 @@ public class SalsaVisemeTriggerEventSubscriber : MonoBehaviour
 	
 	[SerializeField] private Salsa salsaInstance;
 
-   
 
+	private EmotionPublisher pub;
 
-
+    private void Start()
+    {
+		pub = new EmotionPublisher();
+    }
     private void OnEnable()
 	{
 		Salsa.VisemeTriggered += SalsaOnVisemeTriggered;
@@ -29,15 +33,8 @@ public class SalsaVisemeTriggerEventSubscriber : MonoBehaviour
 		if (e.salsaInstance == salsaInstance)
 		{
 			// TODO here should e.visemeTrigger  & salsaInstance.CachedAnalysisValue be published to ROS
-		
 
-			Debug.Log("Viseme (Index) triggered: " + e.visemeTrigger);
-            Debug.Log("Cached analysis value: " + salsaInstance.CachedAnalysisValue);
-       
-
-
+			pub.SetEmotion(e.visemeTrigger, salsaInstance.CachedAnalysisValue);
         }
 	}
-
-   
 }
