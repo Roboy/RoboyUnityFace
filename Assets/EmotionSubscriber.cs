@@ -28,12 +28,12 @@ namespace RosSharp.RosBridgeClient
         {
             base.Start();
             animator = GetComponent<RoboyAnimator>();
-            for(int i = 0; i < faceSetup.Count; i++)
+            for (int i = 0; i < faceSetup.Count; i++)
             {
                 FacePart f = faceSetup[i];
                 f.initialScale = f.Part.localScale;
                 f.initialPosition = f.Part.localPosition;
-                f.offsetPosition = PlayerPrefs.HasKey("calib_pos_"+f.Name)?StringToVector3(PlayerPrefs.GetString("calib_pos_"+f.Name)):Vector3.zero;
+                f.offsetPosition = PlayerPrefs.HasKey("calib_pos_" + f.Name) ? StringToVector3(PlayerPrefs.GetString("calib_pos_" + f.Name)) : Vector3.zero;
                 f.offsetScale = PlayerPrefs.HasKey("calib_scale_" + f.Name) ? StringToVector3(PlayerPrefs.GetString("calib_scale_" + f.Name)) : Vector3.zero;
                 f.Part.localPosition = f.initialPosition + f.offsetPosition;
                 f.Part.localScale = f.initialScale + f.offsetScale;
@@ -92,7 +92,8 @@ namespace RosSharp.RosBridgeClient
                 if (emotion.StartsWith("calib_"))
                 {
                     string[] ep = emotion.Split('_');
-                    if(ep.Length >= 3 && faceSetup.Exists((x) => x.Name == ep[1])){
+                    if (ep.Length >= 3 && faceSetup.Exists((x) => x.Name == ep[1]))
+                    {
                         FacePart f = faceSetup.Find((x) => x.Name == ep[1]);
                         switch (ep[2])
                         {
@@ -118,28 +119,33 @@ namespace RosSharp.RosBridgeClient
                                 switch (ep[3])
                                 {
                                     case "x+":
-                                        f.offsetPosition += new Vector3(1, 0, 0);
+                                        f.offsetPosition += new Vector3(3, 0, 0);
                                         break;
                                     case "x-":
-                                        f.offsetPosition += new Vector3(-1, 0, 0);
+                                        f.offsetPosition += new Vector3(-3, 0, 0);
                                         break;
                                     case "y+":
-                                        f.offsetPosition += new Vector3(0, 1, 0);
+                                        f.offsetPosition += new Vector3(0, 3, 0);
                                         break;
                                     case "y-":
-                                        f.offsetPosition += new Vector3(0, -1, 0);
+                                        f.offsetPosition += new Vector3(0, -3, 0);
                                         break;
                                 }
                                 f.Part.localPosition = f.initialPosition + f.offsetPosition;
                                 break;
 
                         }
+                        PlayerPrefs.SetString("calib_pos_" + f.Name, f.offsetPosition.ToString());
+                        PlayerPrefs.SetString("calib_scale_" + f.Name, f.offsetScale.ToString());
                     }
-
                 }
-                else animator.SetEmotion(emotion);
-                isMessageReceived = false;
+                else
+                {
+                        Debug.Log(emotion);
+                        animator.SetEmotion(emotion);
+                    }
+                    isMessageReceived = false;
+                }
             }
         }
     }
-}
